@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MIKEMUSIC • Distribuidora musical</title>
+<meta name="description" content="MIKEMUSIC — Distribución de música a todas las plataformas digitales." />
+<meta name="theme-color" content="#0b0f14" />
+<!--
+  Este archivo está 100% listo para GitHub Pages:
+  - No usa frameworks ni dependencias externas.
+  - Router por hash (#/ruta) para evitar problemas de rutas en Pages.
+  - Todo el CSS y JS está embebido.
+  Instrucciones:
+  1) Crea un repo en GitHub y sube ESTE archivo como index.html
+  2) Activa GitHub Pages en Settings → Pages → Source: Deploy from a branch → main /root
+  3) Abre: https://TU_USUARIO.github.io/TU_REPO/
+-->
+<style>
+  :root{
+    --bg:#0b0f14;--layer:#101826;--muted:#9aa6b2;--text:#e8ecf1;--accent:#7c3aed;--cyan:#22d3ee;
+    --ring: rgba(124,58,237,.35)
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:
+    radial-gradient(900px 600px at 80% -10%, rgba(124,58,237,.15), transparent),
+    radial-gradient(900px 600px at -10% 10%, rgba(34,211,238,.12), transparent),
+    var(--bg);
+    color:var(--text);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  }
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1100px;margin:0 auto;padding:0 18px}
+  header{position:sticky;top:0;z-index:50;background:rgba(11,15,20,.65);backdrop-filter: blur(8px);border-bottom:1px solid #1d2633}
+  nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{display:flex;align-items:center;gap:.6rem;font-weight:800}
+  .logo i{width:28px;height:28px;border-radius:9px;background:conic-gradient(from 180deg, var(--accent), var(--cyan));box-shadow:0 6px 18px rgba(124,58,237,.35)}
+  .menu{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap}
+  .menu a{padding:.5rem .75rem;border-radius:10px;color:#c6d0db}
+  .menu a.active, .menu a:hover{background:#122033}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1rem;border-radius:14px;border:1px solid transparent;font-weight:700}
+  .btn.primary{background:linear-gradient(90deg,var(--accent),#5b21b6);box-shadow:0 8px 22px rgba(124,58,237,.35)}
+  .btn.ghost{border-color:#263246;background:rgba(16,24,38,.6)}
+  .grid{display:grid;gap:22px}
+  .g-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .card{background:linear-gradient(180deg, rgba(16,24,38,.75), rgba(16,24,38,.45));border:1px solid #1f2a3a;border-radius:22px;padding:20px}
+  .title-xl{font-size:clamp(2rem, 4vw, 3.2rem);line-height:1.05;margin:0}
+  .title-lg{font-size:clamp(1.3rem, 2.2vw, 1.9rem);line-height:1.15;margin:0}
+  .muted{color:var(--muted)}
+  .section{padding:68px 0}
+  .kpis{display:flex;flex-wrap:wrap;gap:14px}
+  .kpi{flex:1;min-width:150px;padding:14px 16px;border-radius:12px;border:1px dashed #334155;background:rgba(2,6,23,.55)}
+  .kpi .num{font-weight:800;font-size:1.4rem}
+  .pill{display:inline-flex;gap:.45rem;align-items:center;border:1px solid #2a3446;border-radius:999px;padding:.3rem .6rem;background:rgba(2,6,23,.55);font-size:.9rem}
+  .platforms{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+  .platforms .p{border:1px solid #243246;border-radius:12px;min-height:54px;display:grid;place-items:center;background:#0b1420}
+  .features li{display:flex;gap:.6rem;align-items:flex-start;margin:.5rem 0}
+  .features svg{flex:0 0 18px;margin-top:2px}
+  .drop{border:1px dashed #334155;border-radius:16px;padding:20px;text-align:center;background:rgba(2,6,23,.45)}
+  .pricing{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  .price{padding:20px;border-radius:18px;border:1px solid #223045;background:linear-gradient(180deg, rgba(2,6,23,.65), rgba(2,6,23,.35))}
+  .price.featured{border-color:var(--accent);box-shadow:0 10px 28px rgba(124,58,237,.25)}
+  .artists{display:grid;grid-auto-flow:column;grid-auto-columns:85%;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+  .artists .artist{scroll-snap-align:start}
+  .faq details{border:1px solid #243244;border-radius:14px;padding:12px;background:rgba(2,6,23,.5)}
+  .faq summary{cursor:pointer;font-weight:700;list-style:none}
+  .faq details[open]{background:#0f172a}
+  .input{border:1px solid #223045;background:#0b1220;color:#e5e7eb;border-radius:12px;padding:12px 14px;outline:none}
+  .input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--ring)}
+  .hidden{display:none !important}
+  footer{border-top:1px solid #1d2633;background:rgba(11,15,20,.6)}
+  @media (max-width: 900px){ .g-2{grid-template-columns:1fr} .pricing{grid-template-columns:1fr} .platforms{grid-template-columns:repeat(3,1fr)} }
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav>
+      <a class="logo" href="#/home" aria-label="Inicio"><i></i><span>MIKEMUSIC</span></a>
+      <div class="menu" role="navigation" aria-label="Principal">
+        <a href="#/home" data-nav>Inicio</a>
+        <a href="#/servicios" data-nav>Servicios</a>
+        <a href="#/precios" data-nav>Precios</a>
+        <a href="#/artistas" data-nav>Artistas</a>
+        <a href="#/soporte" data-nav>Soporte</a>
+        <a class="btn ghost" href="#/dashboard">Iniciar sesión</a>
+        <a class="btn primary" href="#/empezar">Comenzar</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="app" class="container">
+  <!-- HOME -->
+  <section class="section" data-route="home">
+    <div class="grid g-2">
+      <div>
+        <span class="pill">Distribuidora global</span>
+        <h1 class="title-xl" style="margin-top:.6rem">Distribuye tu música a todas las plataformas <span style="background:linear-gradient(90deg,var(--accent),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent">con control total</span>.</h1>
+        <p class="muted" style="margin:12px 0 18px">Spotify, Apple Music, YouTube, TikTok, Amazon, Deezer y +150 tiendas. Reportes claros y pagos puntuales.</p>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+          <a class="btn primary" href="#/empezar">Subir mi lanzamiento</a>
+          <a class="btn ghost" href="#/servicios">Cómo funciona</a>
+        </div>
+        <div class="kpis" style="margin-top:20px">
+          <div class="kpi"><div class="num" data-counter="5200">0</div><div class="muted">Artistas</div></div>
+          <div class="kpi"><div class="num" data-prefix=">" data-counter="150">0</div><div class="muted">Tiendas</div></div>
+          <div class="kpi"><div class="num" data-counter="99.9" data-suffix="%">0</div><div class="muted">Uptime</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="grid g-2">
+          <div class="card" style="min-height:160px">
+            <div class="muted" style="font-size:.9rem">Ingresos estimados</div>
+            <div class="title-lg" style="margin-top:6px">$<span id="rev">0.00</span></div>
+            <div class="muted" style="margin-top:8px">Actualización en vivo</div>
+          </div>
+          <div class="card" style="min-height:160px">
+            <div class="muted" style="font-size:.9rem">Reproducciones hoy</div>
+            <div class="title-lg" style="margin-top:6px"><span id="plays">0</span></div>
+            <div class="muted" style="margin-top:8px">+<span id="growth">0</span>% vs ayer</div>
+          </div>
+        </div>
+        <div class="drop" id="drop">
+          <strong>Arrastra y suelta</strong> tu WAV/FLAC o <label class="pill" style="cursor:pointer"><input type="file" id="file" multiple hidden>Abrir archivos</label>
+          <div class="muted" style="margin-top:8px">Validación de metadatos automática</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="grid g-3">
+        <div class="card">
+          <div class="pill">Pagos</div>
+          <h3 class="title-lg" style="margin-top:6px">Monetiza sin sorpresas</h3>
+          <p class="muted">Conserva el 100% de tu propiedad y gestiona splits.
+          Transferimos a banco o wallet.</p>
+        </div>
+        <div class="card">
+          <div class="pill">Entrega</div>
+          <h3 class="title-lg" style="margin-top:6px">Publicación rápida</h3>
+          <p class="muted">Validamos ISRC/UPC, fechas, territorios y pre‑save en un clic.</p>
+        </div>
+        <div class="card">
+          <div class="pill">Análisis</div>
+          <h3 class="title-lg" style="margin-top:6px">Reportes avanzados</h3>
+          <p class="muted">Segmenta por país, plataforma y playlist. Exporta CSV.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="muted" style="margin-bottom:10px">Distribuimos a</div>
+      <div class="platforms">
+        <div class="p">Spotify</div>
+        <div class="p">Apple Music</div>
+        <div class="p">YouTube</div>
+        <div class="p">TikTok</div>
+        <div class="p">Amazon</div>
+        <div class="p">Deezer</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="section hidden" data-route="servicios">
+    <div class="grid g-2">
+      <div>
+        <h2 class="title-xl">Servicios</h2>
+        <p class="muted">De un single a catálogos completos. Acompañamos tu estrategia 360°.</p>
+        <ul class="features" style="margin-top:10px">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="#10b981" stroke-width="2"/></svg> Entrega a +150 tiendas
+          </li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="#10b981" stroke-width="2"/></svg> Content ID & UGC
+          </li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="#10b981" stroke-width="2"/></svg> Pitch a playlists
+          </li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="#10b981" stroke-width="2"/></svg> Gestión de splits y contratos
+          </li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="#10b981" stroke-width="2"/></svg> ISRC/UPC incluidos
+          </li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="#10b981" stroke-width="2"/></svg> Recaudo de publishing opcional
+          </li>
+        </ul>
+        <div style="margin-top:14px;display:flex;gap:.6rem;flex-wrap:wrap">
+          <a class="btn primary" href="#/empezar">Quiero distribuir ahora</a>
+          <a class="btn ghost" href="#/soporte">Hablar con un asesor</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="title-lg">Flujo de trabajo</h3>
+        <ol style="margin:0;padding-left:1rem">
+          <li style="margin:.4rem 0"><strong>Sube audio y portada</strong> — Revisamos loudness y metadatos.</li>
+          <li style="margin:.4rem 0"><strong>Elige tiendas y fecha</strong> — Pre‑save, preview y territorios.</li>
+          <li style="margin:.4rem 0"><strong>Monetiza y retira</strong> — Reportes diarios y pagos puntuales.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRECIOS -->
+  <section class="section hidden" data-route="precios">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+      <h2 class="title-xl">Planes sin letra pequeña</h2>
+      <label style="display:inline-flex;gap:10px;align-items:center;border:1px solid #263246;padding:6px 10px;border-radius:999px;background:rgba(2,6,23,.6)">
+        Mensual <input id="billing" type="checkbox" style="appearance:none;width:46px;height:24px;border-radius:999px;background:#243244;position:relative;outline:none;border:1px solid #334155;margin:0 6px">
+        <span>Anual</span>
+      </label>
+    </div>
+    <div class="pricing" style="margin-top:14px">
+      <div class="price">
+        <div class="pill">Independientes</div>
+        <h3 class="title-lg">Starter</h3>
+        <div><span class="title-lg" data-price="9">$9</span> / mes</div>
+        <ul class="features">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="#10b981" stroke-width="2"/></svg> 1 artista</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="#10b981" stroke-width="2"/></svg> Lanzamientos ilimitados</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="#10b981" stroke-width="2"/></svg> 0% comisión</li>
+        </ul>
+        <a class="btn primary" href="#/empezar">Elegir Starter</a>
+      </div>
+      <div class="price featured">
+        <div class="pill">Sellos</div>
+        <h3 class="title-lg">Label</h3>
+        <div><span class="title-lg" data-price="29">$29</span> / mes</div>
+        <ul class="features">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="#10b981" stroke-width="2"/></svg> Hasta 5 artistas</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="#10b981" stroke-width="2"/></svg> Splits automáticos</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="#10b981" stroke-width="2"/></svg> ISRC/UPC ilimitados</li>
+        </ul>
+        <a class="btn primary" href="#/empezar">Elegir Label</a>
+      </div>
+      <div class="price">
+        <div class="pill">Empresas</div>
+        <h3 class="title-lg">Enterprise</h3>
+        <div><span class="title-lg" data-price="99">$99</span> / mes</div>
+        <ul class="features">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="#10b981" stroke-width="2"/></svg> Catálogo ilimitado</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="#10b981" stroke-width="2"/></svg> API & SSO</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="#10b981" stroke-width="2"/></svg> Gerente de cuenta</li>
+        </ul>
+        <a class="btn primary" href="#/empezar">Hablar con ventas</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTISTAS -->
+  <section class="section hidden" data-route="artistas">
+    <h2 class="title-xl">Historias con MIKEMUSIC</h2>
+    <p class="muted">Algunos artistas y sellos que confían en nosotros.</p>
+    <div class="artists" id="artists">
+      <div class="artist card">
+        <div class="pill">Trap • República Dominicana</div>
+        <h3 class="title-lg">DarkPeN</h3>
+        <p class="muted">+2.3M streams en 90 días tras optimizar su estrategia.</p>
+      </div>
+      <div class="artist card">
+        <div class="pill">Pop Urbano • México</div>
+        <h3 class="title-lg">Luna Nova</h3>
+        <p class="muted">Entró a 4 playlists editoriales en su primer EP.</p>
+      </div>
+      <div class="artist card">
+        <div class="pill">Afrobeat • Colombia</div>
+        <h3 class="title-lg">Kora Beats</h3>
+        <p class="muted">Duplicó ingresos con Content ID y UGC.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOPORTE -->
+  <section class="section hidden" data-route="soporte">
+    <h2 class="title-xl">Soporte y FAQ</h2>
+    <div class="grid g-2">
+      <div class="faq grid" style="gap:10px">
+        <details>
+          <summary>¿Cuánto tarda en publicarse un lanzamiento?</summary>
+          <div class="muted">24–72h en tiendas rápidas. Ideal: programar con 2 semanas para pitching.</div>
+        </details>
+        <details>
+          <summary>¿Retengo el 100% de mis derechos?</summary>
+          <div class="muted">Sí. Tu música es tuya. Puedes retirarla cuando quieras.</div>
+        </details>
+        <details>
+          <summary>¿Qué formatos aceptan?</summary>
+          <div class="muted">WAV/FLAC 16‑24 bits, portada 3000x3000 JPG/PNG. Metadatos DDEX opcional.</div>
+        </details>
+      </div>
+      <div class="card">
+        <h3 class="title-lg">Contacto</h3>
+        <form id="contact" class="grid" style="gap:10px">
+          <input required name="name" placeholder="Tu nombre" class="input"/>
+          <input required type="email" name="email" placeholder="Email" class="input"/>
+          <textarea required name="msg" rows="4" placeholder="Cuéntanos tu proyecto" class="input"></textarea>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+            <button class="btn primary" type="submit">Enviar</button>
+            <a class="btn ghost" target="_blank" href="https://wa.me/00000000000?text=Hola%20MIKEMUSIC">WhatsApp</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMPEZAR -->
+  <section class="section hidden" data-route="empezar">
+    <h2 class="title-xl">Tu primer lanzamiento</h2>
+    <div class="card">
+      <form id="wizard" class="grid" style="gap:12px">
+        <label class="grid" style="gap:6px">Título <input required class="input" name="title" placeholder="Ej. PROMESAS"/></label>
+        <label class="grid" style="gap:6px">Artista <input required class="input" name="artist" placeholder="Ej. DarkPeN"/></label>
+        <label class="grid" style="gap:6px">Fecha <input required type="date" class="input" name="date"/></label>
+        <label class="grid" style="gap:6px">ISRC <input class="input" name="isrc" placeholder="Auto si vacío"/></label>
+        <div class="drop" id="drop2">Arrastra tu audio o portada aquí</div>
+        <button class="btn primary" type="submit">Validar y continuar</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- DASHBOARD (mock) -->
+  <section class="section hidden" data-route="dashboard">
+    <div class="grid g-2">
+      <div class="card">
+        <h3 class="title-lg">Visión general</h3>
+        <div class="grid g-3">
+          <div class="kpi"><div class="num" id="db-plays">0</div><div class="muted">Reproducciones (30d)</div></div>
+          <div class="kpi"><div class="num" id="db-saves">0</div><div class="muted">Saves</div></div>
+          <div class="kpi"><div class="num" id="db-income">$0.00</div><div class="muted">Ingresos</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="title-lg">Lanzamientos</h3>
+        <ul id="releases" class="features"></ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container section" style="padding:26px 0">
+    <div class="grid g-3">
+      <div>
+        <div class="logo" style="margin-bottom:8px"><i></i> MIKEMUSIC</div>
+        <div class="muted">Distribución musical global. © <span id="year"></span></div>
+      </div>
+      <div>
+        <div class="muted">Compañía</div>
+        <div><a href="#/servicios">Servicios</a></div>
+        <div><a href="#/precios">Precios</a></div>
+        <div><a href="#/soporte">Soporte</a></div>
+      </div>
+      <div>
+        <div class="muted">Legal</div>
+        <div><a href="#">Términos</a></div>
+        <div><a href="#">Privacidad</a></div>
+        <div><a href="#">Cookies</a></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="toast" style="position:fixed;right:18px;bottom:18px;background:#0b1420;border:1px solid #223045;padding:10px 12px;border-radius:10px;display:none"></div>
+
+<script>
+  // Utilidades
+  const $ = (s, c=document) => c.querySelector(s);
+  const $$ = (s, c=document) => Array.from(c.querySelectorAll(s));
+  const toast = (m)=>{ const t=$('#toast'); t.textContent=m; t.style.display='block'; setTimeout(()=>t.style.display='none',2000) }
+
+  // Router por hash (hash-based routing compatible con GitHub Pages)
+  function showRoute(route){
+    const r = (route||'home').replace('#/','');
+    $$('#app [data-route]').forEach(sec=>sec.classList.toggle('hidden', sec.dataset.route!==r));
+    $$('[data-nav]')
+      .forEach(a=>a.classList.toggle('active', a.getAttribute('href')===`#/${r}`));
+    document.title = `MIKEMUSIC • ${r.charAt(0).toUpperCase()+r.slice(1)}`;
+  }
+  window.addEventListener('hashchange', ()=>showRoute(location.hash));
+
+  // Contadores animados
+  function animateCounter(el){
+    const end = parseFloat(el.dataset.counter);
+    let cur=0; const step = Math.max(end/60, 0.5); // ~1s
+    const pfx = el.dataset.prefix||''; const sfx = el.dataset.suffix||'';
+    const int = setInterval(()=>{cur+=step; if(cur>=end){cur=end; clearInterval(int)} el.textContent=`${pfx}${(Math.round(cur*100)/100).toLocaleString('en-US')}${sfx}`},16);
+  }
+
+  // Números demo
+  function randomize(){
+    $('#rev').textContent=(Math.random()*1500+1000).toFixed(2);
+    $('#plays').textContent=(Math.random()*60000+15000|0).toLocaleString('en-US');
+    $('#growth').textContent=(Math.random()*18+2).toFixed(1);
+    $('#db-plays').textContent=(Math.random()*900000|0).toLocaleString('en-US');
+    $('#db-saves').textContent=(Math.random()*60000|0).toLocaleString('en-US');
+    $('#db-income').textContent=`$${(Math.random()*12000+3000).toFixed(2)}`;
+  }
+
+  // Drag & Drop
+  function initDrop(area){
+    const highlight = v=> area.style.borderColor = v? 'var(--accent)' : '#334155';
+    ;['dragenter','dragover'].forEach(e=> area.addEventListener(e, ev=>{ev.preventDefault(); highlight(true)}));
+    ;['dragleave','drop'].forEach(e=> area.addEventListener(e, ev=>{ev.preventDefault(); highlight(false)}));
+    area.addEventListener('drop', ev=>{ toast(`${ev.dataTransfer.files.length} archivo(s) listos`) });
+  }
+
+  // Pricing toggle (mensual/anual 20% OFF)
+  function setupBilling(){
+    const sw = $('#billing');
+    const base = $$('#precios [data-price]');
+    function render(){ base.forEach(el=>{ const m=+el.dataset.price; const v = sw && sw.checked ? Math.round(m*12*0.8) : m; el.textContent = `$${v}`;}); }
+    sw && sw.addEventListener('change', render); render();
+  }
+
+  // Formularios
+  $('#contact')?.addEventListener('submit', e=>{e.preventDefault(); toast('¡Gracias! Responderemos pronto.'); e.target.reset()});
+  $('#wizard')?.addEventListener('submit', e=>{e.preventDefault(); const fd=new FormData(e.target); const t=fd.get('title'); const a=fd.get('artist'); const d=fd.get('date'); const isrc=fd.get('isrc')||('AUTO'+Math.random().toString().slice(2,8));
+    const li=document.createElement('li'); li.innerHTML=`<svg width=18 height=18 viewBox='0 0 24 24' fill='none'><path d='M5 12l4 4 10-10' stroke='#10b981' stroke-width='2'/></svg> <strong>${t}</strong> — ${a} <span class='muted'>(${d})</span> <span class='pill'>ISRC ${isrc}</span>`; $('#releases').prepend(li); toast('Lanzamiento validado'); location.hash = '#/dashboard';
+  });
+
+  // Init
+  document.addEventListener('DOMContentLoaded', ()=>{
+    showRoute(location.hash||'#/home');
+    [$('#drop'), $('#drop2')].filter(Boolean).forEach(initDrop);
+    $$('#app [data-counter]').forEach(animateCounter);
+    setupBilling();
+    randomize();
+    $('#year').textContent = new Date().getFullYear();
+    $('#file')?.addEventListener('change', e=> toast(`${e.target.files.length} archivo(s) seleccionados`));
+  });
+</script>
+</body>
+</html>
